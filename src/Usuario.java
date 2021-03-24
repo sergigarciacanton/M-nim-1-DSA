@@ -3,6 +3,8 @@ import java.util.List;
 public class Usuario {
 
     String nombre;
+
+    String ID;
     List<Pedido> listaRealizados;
 
     public Usuario (String nombre) {
@@ -24,4 +26,8 @@ public class Usuario {
     public void setListaRealizados(List<Pedido> listaRealizados) {
         this.listaRealizados = listaRealizados;
     }
+
+    public String getID() { return ID; }
+
+    public void setID(String ID) { this.ID = ID; }
 }
