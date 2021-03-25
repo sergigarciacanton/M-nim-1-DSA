@@ -1,35 +1,62 @@
 import java.util.*;
 
 public class ProductManagerImpl implements ProductManager{
-    HashMap<String, Usuario> usuarios;
-    List<Producto> listaProductos;
-    Queue<Pedido> colaPendientes;
+    private HashMap<String, Usuario> usuarios;
+    private List<Producto> listaProductos;
+    private Queue<Pedido> colaPedidosPendientes;
 
     public ProductManagerImpl()
     {
         listaProductos = new ArrayList<Producto>();
         usuarios = new HashMap<String, Usuario>();
-        colaPendientes = new LinkedList<Pedido>();
+        colaPedidosPendientes = new LinkedList<Pedido>();
     }
+
+    public void AnadirProducto(Producto producto)
+    {
+        this.listaProductos.add(producto);
+    }
+
+    public void AnadirUsuario(Usuario usuario)
+    {
+        this.usuarios.put(usuario.getID(), usuario);
+    }
+
+    public int getNumeroPedidos(){ return this.colaPedidosPendientes.size(); }
 
     public static void sort(List<Producto> vector) {
         Collections.sort(vector);
     }
 
     //lista ordenada por precios ASC
-    public List<Producto> getListaProductos() {
+    public List<Producto> getListaProductosPorPrecio() {
         sort(listaProductos);
         return listaProductos;
     }
 
+    public List<Producto> getListaProductos()
+    {
+        return listaProductos;
+    }
+
+    public Queue<Pedido> getColaPedidosPendientes()
+    {
+        return this.colaPedidosPendientes;
+    }
+
+    public HashMap<String, Usuario> getUsuarios()
+    {
+        return this.usuarios;
+    }
+
     public void realizarPedido(Pedido pedido) {
-        colaPendientes.add(pedido);
+        colaPedidosPendientes.add(pedido);
         Usuario cliente = pedido.getUsuario();
         cliente.getListaRealizados().add(pedido);
     }
 
     public void servirPedido() {
-        Pedido servido = colaPendientes.poll();
+        Pedido servido = colaPedidosPendientes.poll();
         for(int i = 0; i < servido.getListaProductos().size(); i++) {
             int j = 0;
             Boolean encontrado = false;
@@ -52,6 +79,5 @@ public class ProductManagerImpl implements ProductManager{
         Collections.sort(lista, new OrderProductoByVendidos());
         return lista;
     }
-
 
 }

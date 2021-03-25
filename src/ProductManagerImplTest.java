@@ -12,34 +12,35 @@ public class ProductManagerImplTest {
     @Before
     public void setUp() {
         escenario = new ProductManagerImpl();
-        escenario.listaProductos.add(new Producto("Fanta", 1, 10));
-        escenario.listaProductos.add(new Producto("Café", 0.5F, 50));
-        escenario.listaProductos.add(new Producto("Platano", 0.65F, 15));
+        escenario.AnadirProducto(new Producto("Fanta", 1, 10));
+        escenario.AnadirProducto(new Producto("Café", 0.5F, 50));
+        escenario.AnadirProducto(new Producto("Platano", 0.65F, 15));
 
-        escenario.usuarios.put("123456789A", new Usuario("123456789A","Arnau"));
-        escenario.usuarios.put("987654321B", new Usuario("987654321B","Sergi"));
-        escenario.usuarios.put("456789123C", new Usuario("456789123C","Toni"));
-        escenario.usuarios.put("987321654D", new Usuario("987321654D","Juan"));
+        escenario.AnadirUsuario(new Usuario("123456789A","Arnau"));
+        escenario.AnadirUsuario(new Usuario("987654321B","Sergi"));
+        escenario.AnadirUsuario(new Usuario("456789123C","Toni"));
+        escenario.AnadirUsuario(new Usuario("987321654D","Juan"));
     }
 
     @After
     public void tearDown() {
-        escenario.usuarios.clear();
-        escenario.listaProductos.clear();
+        escenario.getColaPedidosPendientes().clear();
+        escenario.getListaProductos().clear();
     }
 
     @Test
     public void testRealizarPedido() {
-        Assert.assertEquals(0, escenario.colaPendientes.size());
+        Assert.assertEquals(0, escenario.getNumeroPedidos());
+
         List<Producto> listaProductos = new ArrayList<Producto>();
         listaProductos.add(new Producto("Fanta", 1, 2));
         listaProductos.add(new Producto("Platano", 0.65F, 3));
-        Pedido pedido1 = new Pedido(listaProductos, escenario.usuarios.get("123456789A"));
 
-        escenario.realizarPedido(pedido1);
-        Assert.assertEquals(1, escenario.colaPendientes.size());
+        escenario.realizarPedido(new Pedido(listaProductos, escenario.getUsuarios().get("123456789A")));
+        Assert.assertEquals(1, escenario.getNumeroPedidos());
 
         escenario.servirPedido();
-        Assert.assertEquals(0, escenario.colaPendientes.size());
+        Assert.assertEquals(0, escenario.getNumeroPedidos());
+
     }
 }
