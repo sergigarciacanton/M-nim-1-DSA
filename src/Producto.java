@@ -48,6 +48,7 @@ public class Producto implements Comparable<Producto>{
 
     public void setVendidos(int vendidos) { this.vendidos = vendidos; }
 
+    //orden natural : por precio
     public int compareTo(Producto o) {
         return (int)(this.precio - o.getPrecio());
     }

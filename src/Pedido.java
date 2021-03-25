@@ -2,8 +2,8 @@ import java.util.List;
 
 public class Pedido {
 
-    List<Producto> listaProductos;
-    Usuario usuario;
+    private List<Producto> listaProductos;
+    private Usuario usuario;
 
     public Pedido(List<Producto> listaProductos, Usuario usuario) {
         this.listaProductos = listaProductos;

@@ -5,10 +5,17 @@ public class ProductManagerImpl implements ProductManager{
     List<Producto> listaProductos;
     Queue<Pedido> colaPendientes;
 
+    public ProductManagerImpl()
+    {
+        listaProductos = new ArrayList<Producto>();
+        usuarios = new HashMap<String, Usuario>();
+    }
+
     public static void sort(List<Producto> vector) {
         Collections.sort(vector);
     }
 
+    //lista ordenada por precios ASC
     public List<Producto> getListaProductos() {
         sort(listaProductos);
         return listaProductos;
@@ -41,7 +48,9 @@ public class ProductManagerImpl implements ProductManager{
     }
 
     public List<Producto> getListaProductosPorVentas() {
-        return null;
+        List<Producto> lista = this.listaProductos;
+        Collections.sort(lista, new OrderProductoByVendidos());
+        return lista;
     }
 
 
