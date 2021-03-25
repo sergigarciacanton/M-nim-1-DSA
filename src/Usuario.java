@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
@@ -6,8 +7,10 @@ public class Usuario {
     String ID;
     List<Pedido> listaRealizados;
 
-    public Usuario (String nombre) {
+    public Usuario (String id, String nombre) {
         this.nombre = nombre;
+        this.ID = id;
+        listaRealizados = new ArrayList<Pedido>();
     }
 
     public String getNombre() {

@@ -16,10 +16,10 @@ public class ProductManagerImplTest {
         escenario.listaProductos.add(new Producto("Café", 0.5F, 50));
         escenario.listaProductos.add(new Producto("Platano", 0.65F, 15));
 
-        escenario.usuarios.put("123456789A", new Usuario("Arnau"));
-        escenario.usuarios.put("987654321B", new Usuario("Sergi"));
-        escenario.usuarios.put("456789123C", new Usuario("Toni"));
-        escenario.usuarios.put("987321654D", new Usuario("Juan"));
+        escenario.usuarios.put("123456789A", new Usuario("123456789A","Arnau"));
+        escenario.usuarios.put("987654321B", new Usuario("987654321B","Sergi"));
+        escenario.usuarios.put("456789123C", new Usuario("456789123C","Toni"));
+        escenario.usuarios.put("987321654D", new Usuario("987321654D","Juan"));
     }
 
     @After

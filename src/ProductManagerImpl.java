@@ -9,6 +9,7 @@ public class ProductManagerImpl implements ProductManager{
     {
         listaProductos = new ArrayList<Producto>();
         usuarios = new HashMap<String, Usuario>();
+        colaPendientes = new LinkedList<Pedido>();
     }
 
     public static void sort(List<Producto> vector) {
@@ -23,8 +24,7 @@ public class ProductManagerImpl implements ProductManager{
 
     public void realizarPedido(Pedido pedido) {
         colaPendientes.add(pedido);
-
-        Usuario cliente = usuarios.get(pedido.getUsuario().getID());
+        Usuario cliente = pedido.getUsuario();
         cliente.getListaRealizados().add(pedido);
     }
 
