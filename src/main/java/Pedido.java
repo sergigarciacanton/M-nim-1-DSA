@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pedido {
@@ -5,8 +6,8 @@ public class Pedido {
     private List<Producto> listaProductos;
     private Usuario usuario;
 
-    public Pedido(List<Producto> listaProductos, Usuario usuario) {
-        this.listaProductos = listaProductos;
+    public Pedido(Usuario usuario) {
+        this.listaProductos = new ArrayList<Producto>();
         this.usuario = usuario;
     }
 
@@ -14,15 +15,14 @@ public class Pedido {
         return listaProductos;
     }
 
-    public void setListaProductos(List<Producto> listaProductos) {
-        this.listaProductos = listaProductos;
-    }
 
     public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+
+    public void AnadirProducto(Producto producto)
+    {
+        listaProductos.add(producto);
     }
 }

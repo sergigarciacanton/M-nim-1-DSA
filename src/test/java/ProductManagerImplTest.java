@@ -21,9 +21,9 @@ public class ProductManagerImplTest {
         escenario.AnadirUsuario(new Usuario("456789123C","Toni"));
         escenario.AnadirUsuario(new Usuario("987321654D","Juan"));
 
-        List<Producto> listaProductos = new ArrayList<Producto>();
-        listaProductos.add(new Producto("Fanta", 1, 2));
-        escenario.realizarPedido(new Pedido(listaProductos, escenario.getUsuarios().get("987654321B")));
+        Pedido pedido = new Pedido(escenario.getUsuarios().get("987654321B"));
+        pedido.AnadirProducto(new Producto("Fanta", 1, 2));
+        escenario.realizarPedido(pedido);
     }
 
     @After
@@ -36,16 +36,16 @@ public class ProductManagerImplTest {
     public void testRealizarPedido() {
         Assert.assertEquals(1, escenario.getNumeroPedidos());
 
-        List<Producto> listaProductos1 = new ArrayList<Producto>();
-        listaProductos1.add(new Producto("Fanta", 1, 2));
-        listaProductos1.add(new Producto("Platano", 0.65F, 3));
-        escenario.realizarPedido(new Pedido(listaProductos1, escenario.getUsuarios().get("123456789A")));
+        Pedido pedido1 = new Pedido(escenario.getUsuarios().get("123456789A"));
+        pedido1.AnadirProducto(new Producto("Fanta", 1, 2));
+        pedido1.AnadirProducto(new Producto("Platano", 0.65F, 3));
+        escenario.realizarPedido(pedido1);
 
         Assert.assertEquals(2, escenario.getNumeroPedidos());
 
-        List<Producto> listaProductos2 = new ArrayList<Producto>();
-        listaProductos2.add(new Producto("Platano", 0.65F, 3));
-        escenario.realizarPedido(new Pedido(listaProductos2, escenario.getUsuarios().get("456789123C")));
+        Pedido pedido2 = new Pedido(escenario.getUsuarios().get("456789123C"));
+        pedido2.AnadirProducto(new Producto("Platano", 0.65F, 3));
+        escenario.realizarPedido(pedido2);
 
         Assert.assertEquals(3, escenario.getNumeroPedidos());
     }
