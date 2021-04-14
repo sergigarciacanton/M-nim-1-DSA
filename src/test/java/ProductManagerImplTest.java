@@ -11,7 +11,7 @@ public class ProductManagerImplTest {
 
     @Before
     public void setUp() {
-        escenario = new ProductManagerImpl();
+        escenario = ProductManagerImpl.getInstance();
         escenario.AnadirProducto(new Producto("Fanta", 1, 10));
         escenario.AnadirProducto(new Producto("Café", 0.5F, 50));
         escenario.AnadirProducto(new Producto("Platano", 0.65F, 15));

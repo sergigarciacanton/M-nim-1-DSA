@@ -5,11 +5,22 @@ public class ProductManagerImpl implements ProductManager{
     private List<Producto> listaProductos;
     private Queue<Pedido> colaPedidosPendientes;
 
-    public ProductManagerImpl()
+    private static ProductManagerImpl instance;
+
+    private ProductManagerImpl()
     {
         listaProductos = new ArrayList<Producto>();
         usuarios = new HashMap<String, Usuario>();
         colaPedidosPendientes = new LinkedList<Pedido>();
+    }
+
+    public static ProductManagerImpl getInstance()
+    {
+        if(instance == null)
+            instance = new ProductManagerImpl();
+
+        return instance;
+
     }
 
     public void AnadirProducto(Producto producto)
