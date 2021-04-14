@@ -4,6 +4,7 @@ public class ProductManagerImpl implements ProductManager{
     private HashMap<String, Usuario> usuarios;
     private List<Producto> listaProductos;
     private Queue<Pedido> colaPedidosPendientes;
+    private int numVentas;
 
     private static ProductManagerImpl instance;
 
@@ -12,6 +13,7 @@ public class ProductManagerImpl implements ProductManager{
         listaProductos = new ArrayList<Producto>();
         usuarios = new HashMap<String, Usuario>();
         colaPedidosPendientes = new LinkedList<Pedido>();
+        numVentas = 0;
     }
 
     public static ProductManagerImpl getInstance()
@@ -35,13 +37,15 @@ public class ProductManagerImpl implements ProductManager{
 
     public int getNumeroPedidos(){ return this.colaPedidosPendientes.size(); }
 
-    public static void sort(List<Producto> vector) {
-        Collections.sort(vector);
-    }
-
     //lista ordenada por precios ASC
     public List<Producto> getListaProductosPorPrecio() {
-        sort(listaProductos);
+
+        Collections.sort(this.listaProductos, new Comparator<Producto>() {
+            @Override
+            public int compare(Producto p1, Producto p2) {
+                return (int)p1.getPrecio() - (int)p2.getPrecio();
+            }
+        });
         return listaProductos;
     }
 
@@ -75,6 +79,7 @@ public class ProductManagerImpl implements ProductManager{
                 if(listaProductos.get(j).getNombre() == servido.getListaProductos().get(i).getNombre()) {
                     encontrado = true;
                     listaProductos.get(j).setCantidad(listaProductos.get(j).getCantidad() - servido.getListaProductos().get(i).getCantidad());
+                    numVentas += servido.getListaProductos().get(i).getCantidad();
                 }
                 j++;
             }
@@ -87,8 +92,16 @@ public class ProductManagerImpl implements ProductManager{
 
     public List<Producto> getListaProductosPorVentas() {
         List<Producto> lista = this.listaProductos;
-        Collections.sort(lista, new OrderProductoByVendidos());
+        Collections.sort(lista, new Comparator<Producto>() {
+            @Override
+            public int compare(Producto p1, Producto p2) {
+                return p1.getVendidos() - p2.getVendidos();
+            }
+        });
         return lista;
     }
 
+    public int getNumVentas() {
+        return numVentas;
+    }
 }

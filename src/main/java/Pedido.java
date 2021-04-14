@@ -21,7 +21,7 @@ public class Pedido {
     }
 
 
-    public void AnadirProducto(Producto producto)
+    public void anadirProducto(Producto producto)
     {
         listaProductos.add(producto);
     }
