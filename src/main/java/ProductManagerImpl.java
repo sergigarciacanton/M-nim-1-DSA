@@ -25,12 +25,12 @@ public class ProductManagerImpl implements ProductManager{
 
     }
 
-    public void AnadirProducto(Producto producto)
+    public void anadirProducto(Producto producto)
     {
         this.listaProductos.add(producto);
     }
 
-    public void AnadirUsuario(Usuario usuario)
+    public void anadirUsuario(Usuario usuario)
     {
         this.usuarios.put(usuario.getID(), usuario);
     }
